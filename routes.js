@@ -5,32 +5,36 @@ const bcrypt = require("bcryptjs");
 const user = require("./models/user");
 const request = require("request");
 const mongoose = require("mongoose");
-
+const cors = require("cors");
 //var
 const secret = "server";
 // config
 const router = express.Router();
 router.use(bodyparser.json());
 mongoose.connect("mongodb://server123:server123@ds145921.mlab.com:45921/gitapi");
+router.use(cors());
 
 
 //middleware
 var auth = (req, res, next) => {
-try{
-    var u=jwt.verify(req.get('s-auth'),secret);
-    user.findById(u.token,(e,usr)=>{
-      if(e){
-          res.send({error:"unauthorizrd"});
-      }else{
-          next();
-      }
-    })
-    next();
+    try {
+        var u = jwt.verify(req.get('s-auth'), secret);
+        user.findById(u.token, (e, usr) => {
+            if (e) {
+                res.send({
+                    error: "unauthorizrd"
+                });
+            } else {
+                next();
+            }
+        })
+    } catch (e) {
+        res.send({
+            error: "unauthorizrd"
+        });
+    }
+}
 
-}catch(e){
-    res.send({error:"unauthorizrd"});
-}
-}
 //=========testing==================
 router.post("/", auth, (req, res) => {
     res.send(jwt.verify(req.body.token, secret));
@@ -64,9 +68,16 @@ router.post("/register", (req, res) => {
                             password: hash
                         }, (e, u) => {
                             if (e) {
-                                res.send({
-                                    error: "error occured"
-                                });
+                                // console.log(e);
+                                if (e.name === 'MongoError' && e.code === 11000) {
+                                    res.send({
+                                        emailError: "email should be unique"
+                                    })
+                                } else {
+                                    res.send({
+                                        error: "error occured"
+                                    });
+                                }
                             } else if (u) {
                                 res.send({
                                     success: "user added"
@@ -116,7 +127,7 @@ router.post("/login", (req, res) => {
 })
 
 //================seaching===================
-router.post("/search",auth, (req, res) => {
+router.post("/search", auth, (req, res) => {
     var options = {
 
         url: 'https://api.github.com/search/repositories?q=' +
