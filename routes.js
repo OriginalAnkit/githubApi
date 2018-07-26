@@ -17,7 +17,7 @@ mongoose.connect("mongodb://server123:server123@ds145921.mlab.com:45921/gitapi")
 //middleware
 var auth = (req, res, next) => {
 try{
-    var u=jwt.verify(req.body.token,secret);
+    var u=jwt.verify(req.get('s-auth'),secret);
     user.findById(u.token,(e,usr)=>{
       if(e){
           res.send({error:"unauthorizrd"});
@@ -116,7 +116,7 @@ router.post("/login", (req, res) => {
 })
 
 //================seaching===================
-router.post("/search", (req, res) => {
+router.post("/search",auth, (req, res) => {
     var options = {
 
         url: 'https://api.github.com/search/repositories?q=' +
