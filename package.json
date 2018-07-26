@@ -1,0 +1,19 @@
+{
+  "name": "gitapi",
+  "version": "1.0.0",
+  "description": "For the interview of serverGuy, fetch repo from github ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ankit Halder",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.2.5",
+    "request": "^2.87.0"
+  }
+}
