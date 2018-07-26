@@ -1,4 +1,4 @@
-const express= require("express");
+const express = require("express");
 const bodyparser = require("body-parser");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -6,15 +6,35 @@ const user = require("./models/user");
 const request = require("request");
 const mongoose = require("mongoose");
 
+//var
+const secret = "server";
 // config
-const router=express.Router();
+const router = express.Router();
 router.use(bodyparser.json());
 mongoose.connect("mongodb://server123:server123@ds145921.mlab.com:45921/gitapi");
 
 
-// router.post("/",(req,res)=>{
-//     res.send(jwt.verify(req.body.token,"server"));
-// })
+//middleware
+var auth = (req, res, next) => {
+try{
+    var u=jwt.verify(req.body.token,secret);
+    user.findById(u.token,(e,usr)=>{
+      if(e){
+          res.send({error:"unauthorizrd"});
+      }else{
+          next();
+      }
+    })
+    next();
+
+}catch(e){
+    res.send({error:"unauthorizrd"});
+}
+}
+//=========testing==================
+router.post("/", auth, (req, res) => {
+    res.send(jwt.verify(req.body.token, secret));
+})
 
 
 //===========register new User================
@@ -44,9 +64,13 @@ router.post("/register", (req, res) => {
                             password: hash
                         }, (e, u) => {
                             if (e) {
-                                res.send(e);
-                            } else {
-                                res.send(u);
+                                res.send({
+                                    error: "error occured"
+                                });
+                            } else if (u) {
+                                res.send({
+                                    success: "user added"
+                                })
                             }
                         })
                     }
@@ -76,9 +100,9 @@ router.post("/login", (req, res) => {
             bcrypt.compare(req.body.password, user.password, (e, ans) => {
                 if (ans) {
                     res.send(jwt.sign({
-                        username:user.username,
-                        _id:user._id
-                    },"server"))
+                        username: user.username,
+                        _id: user._id
+                    }, secret))
                 } else {
                     res.send("wrong Password");
                 }
@@ -118,5 +142,4 @@ router.post("/search", (req, res) => {
 });
 
 
-
-module.exports=router
+module.exports = router

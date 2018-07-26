@@ -1,6 +1,6 @@
 const express = require("express");
 
-const routes=require("./routes.js")
+const routes=require("./routes")
 //variables
 var app = express();
 app.use("/user",routes);
