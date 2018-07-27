@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { appService } from '../services/appService';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appSer:appService) { }
 
   ngOnInit() {
+  }
+
+  onSubmit(f: NgForm) {
+    this.appSer.login(f.form.value)
+    f.reset();
   }
 
 }

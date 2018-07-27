@@ -1,0 +1,21 @@
+<div class="row nav">
+  <div class="col-sm-2 head">
+    GIT API
+    <i class="fab fa-github-alt"></i>
+  </div>
+
+  <div class="col-sm-1 offset-sm-8 item" >
+    <a>Home <i class="fas fa-home"></i></a>
+    <!-- <a>Register</a> -->
+  </div>
+
+  <div class="col-sm-1 item" routerLink="/login">
+      <a *ngIf="!loggedIn">Login <i class="fas fa-sign-in-alt"></i></a>
+      <a *ngIf="loggedIn">Logout <i class="fas fa-sign-out-alt"></i></a>
+  </div>
+</div>
+<br>
+
+<div class="flash" *ngIf="appSer.flash.show">
+ <h4>{{appSer.flash.msg}}</h4>
+</div>

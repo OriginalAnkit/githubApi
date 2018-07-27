@@ -1,0 +1,17 @@
+.form_contain{
+    width: 50%;
+    margin:auto
+}
+.form_contain h1{
+    text-align: center;
+    color: #593196;
+}
+
+input.ng-invalid.ng-touched{
+    background-color: rgba(241, 236, 236, 0.719);
+    border:1px solid red;
+}
+
+.error_text{
+    color: red;
+}

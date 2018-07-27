@@ -119,9 +119,9 @@ router.post("/login", (req, res) => {
                 }
             })
         } else {
-            res.send({
-                error: "No user Found"
-            })
+            res.send(
+            "No user Found"
+            )
         }
     })
 })

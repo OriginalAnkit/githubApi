@@ -1,0 +1,42 @@
+.nav{
+    height: 40px;
+    background-color: #593196;
+    border-bottom: 10px;
+    font-size: 18px;
+    margin: auto;
+}
+
+.head{
+    color:white;
+    font-weight: bold;   
+    line-height: 40px; 
+}
+
+.item{
+    color: rgba(255, 255, 255, 0.705);
+    font-size: 14px;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+.item a:hover{
+    color: white;
+}
+
+.flash{
+    height: 40px;
+    width: 80%;
+    background-color:#9999ff;
+    border-radius: 4px;
+    margin:auto;
+    z-index: 5;
+    top: 5%;
+    right: 10%;
+    position: fixed;
+    box-shadow: 2px 3px 10px black;
+}
+
+.flash h4{
+    color:white;
+    text-align: center
+}

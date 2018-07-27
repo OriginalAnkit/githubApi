@@ -1,3 +1,19 @@
-<p>
-  login works!
-</p>
+<div class="form_contain" >
+  <h1>LOGIN
+    <i class="fas fa-user-circle"></i>
+  </h1>
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="form-group">
+      <label> Enter Email Id</label>
+      <input type="text" class="form-control" placeholder="Email id" name="email" pattern="\S+@\S+\.\S+" ngModel #name="ngModel" required>
+      <span *ngIf="!name.valid&&name.touched" class="error_text">Enter valid Email id</span>
+    </div>
+    <div class="form-group">
+        <label> Enter password</label>
+        <input type="password" placeholder="password" class="form-control" name="password" ngModel #pass="ngModel" required >
+        <span *ngIf="!pass.valid&&pass.touched" class="error_text">Please enter password</span>
+  
+      </div>
+      <button class="btn btn-primary" [disabled]="!f.valid">LOGIN</button>
+  </form>
+</div>

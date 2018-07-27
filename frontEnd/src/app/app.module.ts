@@ -8,8 +8,11 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { appService } from './services/appService';
 import { HttpModule } from '@angular/http';
+import { HeaderComponent } from './header/header.component';
+import { DashbordComponent } from './dashbord/dashbord.component';
 
 const appRoutes:Routes=[
+  {path:"",component:DashbordComponent},
   {path:"register",component:RegisterComponent},
   {path:"login",component:LoginComponent}
 ]
@@ -18,7 +21,9 @@ const appRoutes:Routes=[
   declarations: [
     AppComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    HeaderComponent,
+    DashbordComponent
   ],
   imports: [
     BrowserModule,
