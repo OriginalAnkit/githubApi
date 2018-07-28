@@ -10,11 +10,14 @@ import { appService } from './services/appService';
 import { HttpModule } from '@angular/http';
 import { HeaderComponent } from './header/header.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
+import { SearchComponent } from './search/search.component';
+import { AuthService } from './services/authService';
 
 const appRoutes:Routes=[
   {path:"",component:DashbordComponent},
   {path:"register",component:RegisterComponent},
-  {path:"login",component:LoginComponent}
+  {path:"login",component:LoginComponent},
+  {path:"search",component:SearchComponent,canActivate:[AuthService]}
 ]
 
 @NgModule({
@@ -23,7 +26,8 @@ const appRoutes:Routes=[
     RegisterComponent,
     LoginComponent,
     HeaderComponent,
-    DashbordComponent
+    DashbordComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,7 @@ const appRoutes:Routes=[
     FormsModule,
     HttpModule
   ],
-  providers: [appService],
+  providers: [appService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

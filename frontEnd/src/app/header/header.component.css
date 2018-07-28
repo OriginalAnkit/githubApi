@@ -34,9 +34,10 @@
     right: 10%;
     position: fixed;
     box-shadow: 2px 3px 10px black;
+    line-height: 40px;
 }
 
 .flash h4{
-    color:white;
-    text-align: center
+    color:black;
+    text-align: center;
 }

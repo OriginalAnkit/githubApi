@@ -9,13 +9,16 @@
     <!-- <a>Register</a> -->
   </div>
 
-  <div class="col-sm-1 item" routerLink="/login">
-      <a *ngIf="!loggedIn">Login <i class="fas fa-sign-in-alt"></i></a>
-      <a *ngIf="loggedIn">Logout <i class="fas fa-sign-out-alt"></i></a>
+  <div class="col-sm-1 item">
+    <div  routerLink="/login">
+      <a *ngIf="!appSer.loggedIn" >Login <i class="fas fa-sign-in-alt"></i></a>
+    </div>
+      <a *ngIf="appSer.loggedIn" (click)="logout()">Logout <i class="fas fa-sign-out-alt"></i></a>
   </div>
 </div>
 <br>
-
-<div class="flash" *ngIf="appSer.flash.show">
- <h4>{{appSer.flash.msg}}</h4>
+<div *ngIf="appSer.flash.show">
+  <div class="flash">
+   <h4>{{appSer.flash.msg}}</h4>
+  </div>
 </div>

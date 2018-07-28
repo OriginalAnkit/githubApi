@@ -1,0 +1,99 @@
+<div class="container stick">
+  <div class="row search_head">
+    <div class="col-sm-6">
+      <input type="text" placeholder="Repo Name" class="form-control" [(ngModel)]="repo">
+    </div>
+    <div class="col-sm-2">
+      <input type="text" placeholder="technology" class="form-control" [(ngModel)]="stack" [disabled]="repo.length<1">
+    </div>
+    <div class="col-sm-2">
+      <select class="form-control" [(ngModel)]="sort" [disabled]="repo.length<1">
+        <option disabled>sort</option>
+        <option>stars</option>
+        <option>forks</option>
+        <option>updated</option>
+
+      </select>
+    </div>
+    <div class="col-sm-1">
+      <select class="form-control" [(ngModel)]="order" [disabled]="sort =='sort'">
+        <option disabled>order </option>
+        <option>desc</option>
+        <option>asc</option>
+      </select>
+    </div>
+    <div class="col-sm-1">
+      <button class="btn btn-primary" (click)="onRepoSearch()" [disabled]="repo.length<1">Search</button>
+    </div>
+  </div>
+</div>
+
+<br>
+<div style="text-align: center" *ngIf="!appSer.repos">
+  <h1>Search for Repository</h1>
+  <div class="lds-ring" *ngIf="loader"><div></div><div></div><div></div><div></div></div>
+</div>
+
+<!-- showing repos -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4">
+      <div *ngFor="let r of appSer.repos;let i=index">
+        <div class="list-group-item" (click)="selectedRepo(i)">
+          <div class="row">
+            <div class="col-sm-6">
+              <strong>Name : </strong>{{r.name}}
+              <br>
+              <strong>Owner : </strong>{{r.owner.login}}
+            </div>
+            <div class="col-sm-6">
+              <strong>Created At : </strong>{{r.created_at}}
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="container selRepo" *ngIf="selRepo">
+        <p>
+          <strong>Name : </strong>{{selRepo.name}} </p>
+        <p>
+          <strong>Owner : </strong>{{selRepo.owner.login}} </p>
+        <p>
+          <strong>Created at : </strong>{{selRepo.created_at}} </p>
+
+        <p>
+          <strong>Created at : </strong>{{selRepo.created_at}} </p>
+        <p>
+          <strong>Language : </strong>{{selRepo.language}} </p>
+        <p>
+          <strong>Description : </strong>{{selRepo.description}} </p>
+        <p>
+          <strong>ID : </strong>{{selRepo.id}} </p>
+        <p>
+          <strong>watchers : </strong>{{selRepo.watchers}} </p>
+        <p>
+          <strong>updated : </strong>{{selRepo.updated_at}} </p>
+        <p>
+          <strong>Issues : </strong>{{selRepo.open_issues}} </p>
+        <p>
+          <strong>url: </strong>
+          <a href="{{selRepo.url}}">{{selRepo.url}}</a>
+        </p>
+        <p>
+          <strong>Howepage : </strong>
+          <a href="{{selRepo.homepage}}">{{selRepo.homepage}}</a>
+        </p>
+        <p>
+          <strong>Team : </strong>
+          <a href="{{selRepo.teams_url}}">{{selRepo.teams_url}}</a>
+        </p>
+      </div>
+
+      <div class="container selRepo" *ngIf="!selRepo && appSer.repos" style="height: 100%; text-align: center">
+        <h1>Select a Repository</h1>
+      </div>
+    </div>
+  </div>
+</div>

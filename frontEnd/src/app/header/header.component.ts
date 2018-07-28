@@ -9,9 +9,14 @@ import { appService } from '../services/appService';
 export class HeaderComponent implements OnInit {
 
   constructor(public appSer:appService) { }
-  loggedIn:boolean;
   ngOnInit() {
-    this.loggedIn=localStorage.getItem("s-auth")?true:false;
+    this.appSer.loggedIn=localStorage.getItem("s-auth")?true:false;
+  }
+
+  logout(){
+    this.appSer.logout();
+    this.appSer.loggedIn=false;
+
   }
 
 }

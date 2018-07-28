@@ -1,0 +1,78 @@
+[disabled]{
+    cursor: not-allowed;
+}
+
+.search_head{
+    background-color:lightgray;
+    padding: 10px;
+   
+    
+}
+.stick{
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.repo{
+    height: 100px;
+    margin-left: 10px;
+    width: 25%;
+    background-color: lightgrey;
+}
+
+.list-group-item{
+    background-color:#593196;
+    border-bottom: 1px solid white
+}
+
+.list-group-item:hover{
+    background-color: #9270c5;
+    cursor: pointer;
+}
+.selRepo{
+    font-size: 18px;
+    background-color: lightgray;
+    position: sticky;
+    top: 60px;
+}
+
+
+
+/* loader */
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+  }
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 51px;
+    height: 51px;
+    margin: 6px;
+    border: 6px solid #593196;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #593196 transparent transparent transparent;
+  }
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
