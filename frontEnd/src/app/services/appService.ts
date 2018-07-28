@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Injectable()
 export class appService {
     url = "http://localhost:3000";
-    repos:any[];
+    repos: any[];
     loggedIn: boolean;
     flash = {
         msg: "",
@@ -68,20 +68,25 @@ export class appService {
             (res: any) => {
                 if (res._body == `{"error":"unauthorizrd"}`) {
                     localStorage.clear();
-                    this.showFlash(true,"UnAuthorized");
-                    this.loggedIn=false;
+                    this.showFlash(true, "UnAuthorized");
+                    this.loggedIn = false;
                     this.router.navigate(["/login"]);
-                }else{
-                    this.repos=JSON.parse(res._body).items
+                } else {
+                    this.repos = JSON.parse(res._body).items
                     console.log(JSON.parse(res._body).items);
                 }
             }
         )
     }
 
+    // ============getOne repo==================
+    oneRepo(num) {
+        return this.repos[num];
+    }
 
-    oneRepo(num){
-     return this.repos[num];
+    // ===============recent search================
+    getSearch(){
+       return this.http.get(this.url+"/user/recentsearch",{headers:this.head()})
     }
 
     //============headers==================

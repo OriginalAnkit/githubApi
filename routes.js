@@ -8,21 +8,28 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 //var
 const secret = "server";
+var userId=null;
 // config
 const router = express.Router();
 router.use(bodyparser.json());
-mongoose.connect("mongodb://server123:server123@ds145921.mlab.com:45921/gitapi");
+// mongoose.connect("mongodb://server123:server123@ds145921.mlab.com:45921/gitapi");
+mongoose.connect("mongodb://localhost:27017/gitapi");
 router.use(cors());
 
 
 //middleware
 var auth = (req, res, next) => {
     try {
+        // console.log(req.get('s-auth'))
         var u = jwt.verify(req.get('s-auth'), secret);
+        // this.userId=u.token;
+        // console.log(u._id);
+        userId=u._id;
+
         user.findById(u.token, (e, usr) => {
             if (e) {
                 res.send({
-                    error: "unauthorizrd"
+                    error: "unauthorized"
                 });
             } else {
                 next();
@@ -36,8 +43,22 @@ var auth = (req, res, next) => {
 }
 
 //=========testing==================
-router.post("/", auth, (req, res) => {
-    res.send(jwt.verify(req.body.token, secret));
+router.post("/", (req, res) => {
+    user.findByIdAndUpdate("5b5c25f72b3ccc479466d885", {
+        search: [{
+            name: "x",
+            language: "a"
+        }, {
+            name: "x",
+            language: "a"
+        }]
+    }, (e, r) => {
+        if (e) {
+            res.send(e)
+        } else {
+            res.send(r)
+        }
+    })
 })
 
 
@@ -120,7 +141,7 @@ router.post("/login", (req, res) => {
             })
         } else {
             res.send(
-            "No user Found"
+                "No user Found"
             )
         }
     })
@@ -133,7 +154,6 @@ router.post("/search", auth, (req, res) => {
         url: 'https://api.github.com/search/repositories?q=' +
             req.body.name +
             "+language:" + req.body.language +
-            "+archived:" + req.body.archived +
             "&sort=" + req.body.sort +
             "&order=" + req.body.order,
         json: true,
@@ -152,5 +172,16 @@ router.post("/search", auth, (req, res) => {
     })
 });
 
+
+//=============recent searches=================
+router.get("/recentsearch",auth,(req,res)=>{
+  user.findById(userId,'search',(e,data)=>{
+   if(e){
+   res.send("no data");
+   }else{
+       res.send(data)
+   }
+})    
+})
 
 module.exports = router

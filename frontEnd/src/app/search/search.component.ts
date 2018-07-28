@@ -14,9 +14,13 @@ export class SearchComponent implements OnInit {
   sort = "sort";
   loader=false;
   selRepo:any;
+  searches:any;
   constructor(private appSer: appService) { }
 
   ngOnInit() {
+    this.appSer.getSearch().subscribe((res:any)=>{
+      this.searches=JSON.parse(res._body).search
+  })
   }
   onRepoSearch() {
     // console.log(this.stack);
@@ -28,7 +32,7 @@ export class SearchComponent implements OnInit {
       name: this.repo,
       language: this.stack,
       sort: this.sort,
-      order: this.order
+      order: this.order     
     })
 
   }

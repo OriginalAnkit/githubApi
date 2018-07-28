@@ -27,7 +27,12 @@
     </div>
   </div>
 </div>
-
+<!-- //recent search -->
+<span *ngFor="let s of searches">
+<span class="badge badge-primary">
+ Recent Searches: {{s.name}}:{{s.language}}
+</span>
+</span>
 <br>
 <div style="text-align: center" *ngIf="!appSer.repos">
   <h1>Search for Repository</h1>
