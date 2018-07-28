@@ -1,14 +1,16 @@
 const express = require("express");
-
-const routes=require("./routes")
+const path = require('path');
+const routes = require("./routes")
 //variables
 var app = express();
-app.use("/user",routes);
+app.use("/user", routes);
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 
-
-
-
+app.get("*",(req,res)=>{
+    res.sendFile(path.join(__dirname,'public/index.html'));
+})
 
 
 //port setup

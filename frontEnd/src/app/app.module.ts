@@ -17,7 +17,8 @@ const appRoutes:Routes=[
   {path:"",component:DashbordComponent},
   {path:"register",component:RegisterComponent},
   {path:"login",component:LoginComponent},
-  {path:"search",component:SearchComponent,canActivate:[AuthService]}
+  {path:"search",component:SearchComponent,canActivate:[AuthService]},
+  {path:"**",redirectTo:"login"}
 ]
 
 @NgModule({

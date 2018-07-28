@@ -14,7 +14,7 @@ export class SearchComponent implements OnInit {
   sort = "sort";
   selRepo: any;
   searches: any[];
-  constructor(private appSer: appService) { }
+  constructor(public appSer: appService) { }
 
   ngOnInit() {
     this.appSer.getSearch().subscribe((res: any) => {
