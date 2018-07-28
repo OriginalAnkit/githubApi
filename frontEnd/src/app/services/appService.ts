@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class appService {
-    url = "http://localhost:3000";
+    // url = "http://localhost:3000";
+    url="";
     repos: any[];
     loggedIn: boolean;
     loader = false;
