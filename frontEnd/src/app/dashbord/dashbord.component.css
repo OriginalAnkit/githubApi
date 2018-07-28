@@ -1,0 +1,12 @@
+h1,p,h2{
+    text-align: center;
+}
+
+h2{
+    font-family: 'Pacifico', cursive;
+    font-size: 72px;
+}
+
+.icon{
+    font-size: 72px;
+}

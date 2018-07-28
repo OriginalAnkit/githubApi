@@ -12,8 +12,8 @@ var userId=null;
 // config
 const router = express.Router();
 router.use(bodyparser.json());
-// mongoose.connect("mongodb://server123:server123@ds145921.mlab.com:45921/gitapi");
-mongoose.connect("mongodb://localhost:27017/gitapi");
+mongoose.connect("mongodb://server123:server123@ds145921.mlab.com:45921/gitapi");
+// mongoose.connect("mongodb://localhost:27017/gitapi");
 router.use(cors());
 
 
@@ -42,21 +42,14 @@ var auth = (req, res, next) => {
     }
 }
 
-//=========testing==================
-router.post("/", (req, res) => {
-    user.findByIdAndUpdate("5b5c25f72b3ccc479466d885", {
-        search: [{
-            name: "x",
-            language: "a"
-        }, {
-            name: "x",
-            language: "a"
-        }]
-    }, (e, r) => {
+//=========recent search adding==================
+router.post("/recentsearch",auth, (req, res) => {
+    console.log(req.body)
+    user.findByIdAndUpdate(userId, {search:req.body}, (e, r) => {
         if (e) {
-            res.send(e)
+            console.log(e)
         } else {
-            res.send(r)
+            console.log(r)
         }
     })
 })

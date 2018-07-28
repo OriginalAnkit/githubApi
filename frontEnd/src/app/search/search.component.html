@@ -28,17 +28,23 @@
   </div>
 </div>
 <!-- //recent search -->
-<span *ngFor="let s of searches">
-<span class="badge badge-primary">
- Recent Searches: {{s.name}}:{{s.language}}
+<div class="container">
+  <br>
+  Recent Searches:
+<span *ngFor="let s of searches ; let i=index">
+<span class="badge badge-primary" (click)="recentSearch(i)">
+  {{s.name}}:{{s.language}}
 </span>
 </span>
+</div>
 <br>
 <div style="text-align: center" *ngIf="!appSer.repos">
   <h1>Search for Repository</h1>
-  <div class="lds-ring" *ngIf="loader"><div></div><div></div><div></div><div></div></div>
 </div>
+<div style="text-align: center">
+<div class="lds-ring" *ngIf="this.appSer.loader"><div></div><div></div><div></div><div></div></div>
 
+</div>
 <!-- showing repos -->
 <div class="container-fluid">
   <div class="row">

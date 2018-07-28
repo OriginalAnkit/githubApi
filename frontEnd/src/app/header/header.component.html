@@ -1,24 +1,35 @@
 <div class="row nav">
   <div class="col-sm-2 head">
-    GIT API
-    <i class="fab fa-github-alt"></i>
+    <div routerLink="" style="cursor: pointer;">
+      GIT API
+      <i class="fab fa-github-alt"></i>
+    </div>
   </div>
 
-  <div class="col-sm-1 offset-sm-8 item" >
-    <a>Home <i class="fas fa-home"></i></a>
+  <div class="col-sm-1 offset-sm-8 item">
+    <div class="div" routerLink="/search">
+      <a>Search
+          <i class="fas fa-home"></i>
+        </a>
+
+    </div>
     <!-- <a>Register</a> -->
   </div>
 
   <div class="col-sm-1 item">
-    <div  routerLink="/login">
-      <a *ngIf="!appSer.loggedIn" >Login <i class="fas fa-sign-in-alt"></i></a>
+    <div routerLink="/login">
+      <a *ngIf="!appSer.loggedIn">Login
+        <i class="fas fa-sign-in-alt"></i>
+      </a>
     </div>
-      <a *ngIf="appSer.loggedIn" (click)="logout()">Logout <i class="fas fa-sign-out-alt"></i></a>
+    <a *ngIf="appSer.loggedIn" (click)="logout()">Logout
+      <i class="fas fa-sign-out-alt"></i>
+    </a>
   </div>
 </div>
 <br>
 <div *ngIf="appSer.flash.show">
   <div class="flash">
-   <h4>{{appSer.flash.msg}}</h4>
+    <h4>{{appSer.flash.msg}}</h4>
   </div>
 </div>

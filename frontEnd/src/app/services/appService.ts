@@ -7,6 +7,7 @@ export class appService {
     url = "http://localhost:3000";
     repos: any[];
     loggedIn: boolean;
+    loader = false;
     flash = {
         msg: "",
         show: false
@@ -72,6 +73,7 @@ export class appService {
                     this.loggedIn = false;
                     this.router.navigate(["/login"]);
                 } else {
+                    this.loader=false;
                     this.repos = JSON.parse(res._body).items
                     console.log(JSON.parse(res._body).items);
                 }
@@ -85,8 +87,13 @@ export class appService {
     }
 
     // ===============recent search================
-    getSearch(){
-       return this.http.get(this.url+"/user/recentsearch",{headers:this.head()})
+    getSearch() {
+        return this.http.get(this.url + "/user/recentsearch", { headers: this.head() })
+    }
+
+    //========add recent searches==========
+    addSearches(data) {
+        this.http.post(this.url + "/user/recentsearch", data, { headers: this.head() }).subscribe();
     }
 
     //============headers==================

@@ -12,33 +12,54 @@ export class SearchComponent implements OnInit {
   stack = "";
   order = "order";
   sort = "sort";
-  loader=false;
-  selRepo:any;
-  searches:any;
+  selRepo: any;
+  searches: any[];
   constructor(private appSer: appService) { }
 
   ngOnInit() {
-    this.appSer.getSearch().subscribe((res:any)=>{
-      this.searches=JSON.parse(res._body).search
-  })
+    this.appSer.getSearch().subscribe((res: any) => {
+      this.searches = JSON.parse(res._body).search
+    })
   }
   onRepoSearch() {
-    // console.log(this.stack);
-    // console.log(this.repo);
-    // console.log(this.sort);
-    // console.log(this.order);
-    this.loader=true;
+    var find = false;
+    this.searches.forEach(e => {
+      if (e.name == this.repo && e.language == this.stack) {
+        find = true;
+      }
+    }
+    );
+    if (!find) {
+     if(this.searches.length>=5){
+       this.searches.pop();
+     }
+     this.searches.push({
+       name:this.repo,
+       language:this.stack
+     })
+    }
+    // console.log(this.searches);
+    this.appSer.addSearches(this.searches);
+    this.appSer.loader = true;
     this.appSer.searchRepo({
       name: this.repo,
       language: this.stack,
       sort: this.sort,
-      order: this.order     
+      order: this.order
     })
 
   }
 
   selectedRepo(i) {
     console.log(i);
-    this.selRepo=this.appSer.oneRepo(i)
+    this.selRepo = this.appSer.oneRepo(i)
+  }
+
+  recentSearch(i) {
+    this.appSer.loader = true;
+    this.appSer.searchRepo({
+      name: this.searches[i].name,
+      language: this.searches[i].language
+    })
   }
 }
